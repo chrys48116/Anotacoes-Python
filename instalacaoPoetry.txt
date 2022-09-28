@@ -1,0 +1,27 @@
+PASSO A PASSO DE INSTALAÇÃO DO PYTHON, PYENV E POETRY
+
+OBS: Provavelmente necessario fazer tudo como usuario administrador
+
+1- Instalação do Python 3.10.7 no usuario global e o Python 3.11.0 no usuario local
+    -- Python local 3.11.0rc2
+
+2- Alocação do Python no Path
+
+3- Instalação do Pyenv 3.10.7 no usuario global
+    -- Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1"
+    -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+
+    --setar como global
+        Pyenv global 3.10.7
+    --setar como local
+        Pyenv local 3.11.0rc2
+
+4- Instalação do Poetry
+    -- (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
+        --setar como global
+            Pyenv global 3.10.7
+        --setar como local
+            Pyenv local 3.11.0rc2
+
+5- Criação do projeto poetry
+    -- poetry new nomedoprojeto --name nomedoarquivo
