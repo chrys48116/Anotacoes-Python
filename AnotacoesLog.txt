@@ -1,0 +1,39 @@
+Logging:
+    import logging
+Loguru:
+    import loguru
+
+#Tecnologia Sentry
+
+#Debug:
+    - Expor eventos necessarios para possiveis problemas de desenvolvimento ou 
+    em ambiente de teste. (Usado no lugar do print para fazer o Debug).
+
+#Info:
+    - Eventos somente informativos. Uma chamada externa, um login, alguma verificação
+    rotineira, mas somente informativos.(Diferente do Debug).
+
+#Warning:
+    - Eventos inesperados, que não resultam em erros, porem devem ser analisadas com 
+    atenção depois.(aplicação não necessariamente parou).
+
+#Error:
+    - Eventos que não conseguiram ser executados, alguma coisa não está funcionando como
+    deveria funcionar.(aplicação parou).
+
+#Critical:
+    - Um evento, ou alguma parte da aplicação esta comprometida. Faz com que o sistema não 
+    atue da maneira que deveria operar.(erro cabuloso e fudeu tudo). 
+
+# FileHandler e #StreamHendler
+    - FileHandler escreve no arquivo txt
+    - StreamHendler escreve no shell
+
+# Mais informações:
+    - Documentação:
+        -- https://docs.python.org/3/library/logging.html
+    - Video:
+        -- https://www.youtube.com/watch?v=PGAOqAWuwC0
+    - Git:
+        -- https://github.com/dunossauro/live-de-python/commit/2adb12894511e29fbb8c0c3897d038bf9436696e
+        live 198
