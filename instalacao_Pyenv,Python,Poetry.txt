@@ -1,0 +1,139 @@
+Para configurarmos melhor nosso ambiente para desenvolvimento. Podemos melhorar com o tempo esse script.
+
+1. PowerShell
+
+	https://aka.ms/powershell-release?tag=stable
+
+
+2. Python
+
+	https://www.python.org/downloads/
+
+	Atualizar PIP usando o comando:
+	python.exe -m pip install --upgrade pip
+
+
+3. Visual Studio Code
+
+	https://code.visualstudio.com/download
+
+
+4. Git
+
+	https://git-scm.com/download/win
+
+
+5. PyEnv Windows
+
+	Instruções:
+
+	https://github.com/pyenv-win/pyenv-win
+	https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md
+	
+	a) Instalação Manual (ZIP)
+
+		 - Baixe o arquivo ZIP do link https://github.com/pyenv-win/pyenv-win/archive/master.zip:
+		 
+		 - Descompacte o conteúde deste arquivo no caminho desejado (por ex.: c:\dev\Software\Python\.pyenv\) e garanta que a pasta bin esteja dentro de \.pyenv\pyenv-win
+
+		 - Configurações de sistema:
+
+			Adicionar as variáveis de ambiente PYENV, PYENV_HOME e PYENV_ROOT pelo PowerShell;
+
+				[System.Environment]::SetEnvironmentVariable('PYENV',"C:\dev\Software\Python\.pyenv\pyenv-win\","User")
+
+				[System.Environment]::SetEnvironmentVariable('PYENV_ROOT',"C:\dev\Software\Python\.pyenv\pyenv-win\","User")
+
+				[System.Environment]::SetEnvironmentVariable('PYENV_HOME',"C:\dev\Software\Python\.pyenv\pyenv-win\","User")
+
+			Adicionar os caminhos do PyEnv à variável USER PATH;
+
+				[System.Environment]::SetEnvironmentVariable('path', "C:\dev\Software\Python\.pyenv\pyenv-win\bin;" + "C:\dev\Software\Python\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
+
+			Reiniciar computador
+
+		 - Execute o comando pyenv para testar
+
+	
+		 	> Se ocorrer um erro semalhante ao abaixo:
+
+				pyenv: File \.pyenv\pyenv-win\bin\pyenv.ps1 cannot be loaded. The file \.pyenv\pyenv-win\bin\pyenv.ps1 is not digitally signed.
+				You cannot run this script on the current system.
+				For more information about running scripts and setting execution policy, see about_Execution_Policies at https://go.microsoft.com/fwlink/?LinkID=135170.
+			
+			  - execute os comandos abaixo um de cada vez e tente executar o pyenv novamente para testar:
+
+				1. Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+				   ou
+				   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+
+				2. Unblock-File (Join-Path $env:PYENV 'bin/pyenv.ps1')
+
+		 - Atualize o cache do banco de dados do pyenv em sua máquina com o comando> pyenv update
+
+		 - Instale uma versão específica do Python para testar com o pyenv> pyenv install 3.10.8
+
+
+	b) PowerShell
+
+			Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+
+		 > Se tiver problemas de UnauthorizedAccess use o comando abaixo e volte a executar o comando anterior
+
+			Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+
+
+
+6. Poetry
+
+	https://python-poetry.org/
+
+	a) Definindo a variável de ambiente POETRY_HOME
+	
+		[System.Environment]::SetEnvironmentVariable('POETRY_HOME',"C:\dev\Software\Python\pypoetry\","User")
+
+        b) Adicionando o Poetry ao Path
+
+		[System.Environment]::SetEnvironmentVariable('path', "C:\dev\Software\Python\pypoetry\bin\;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
+
+	c) Reiniciar computador
+
+	d) Executar o script de instalação:
+
+		(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
+
+	   - Se houver algum erro de execução de script, execute um dos comandos abaixo e tente execytar o script de instalação novamente:
+
+		Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+	   ou
+	   	Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+
+	e) Atualize o poetry com o comando> poetry self update
+
+	f) Configure o poetry com os comandos abaixo:
+
+		> poetry config cache-dir "C:\dev\Software\Python\pypoetry\venv\Cache"
+		> poetry config virtualenvs.in-project true
+		> poetry config virtualenvs.options.always-copy true
+
+	f) Digite o seguinte comando para verificar se as configurações do poetry estão como abaixo> poetry config --list
+
+		cache-dir = "C:\\dev\\Software\\Python\\pypoetry\\venv\\Cache"
+		experimental.new-installer = true
+		experimental.system-git-client = false
+		installer.max-workers = null
+		installer.no-binary = null
+		installer.parallel = true
+		virtualenvs.create = true
+		virtualenvs.in-project = true
+		virtualenvs.options.always-copy = true
+		virtualenvs.options.no-pip = false
+		virtualenvs.options.no-setuptools = false
+		virtualenvs.options.system-site-packages = false
+		virtualenvs.path = "{cache-dir}\\virtualenvs"  # C:\dev\Software\Python\pypoetry\venv\Cache\virtualenvs
+		virtualenvs.prefer-active-python = false
+		virtualenvs.prompt = "{project_name}-py{python_version}"
+
+		- Caso não estejam, utilize o comando poetry config com os argumentos correspondetes.
+
+	--> Mais configurações em https://python-poetry.org/docs/configuration/
